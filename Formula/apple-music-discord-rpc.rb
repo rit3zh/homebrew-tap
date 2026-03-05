@@ -25,6 +25,8 @@ class AppleMusicDiscordRpc < Formula
 
     (bin/"apple-music-discord-rpc").write <<~SH
       #!/bin/bash
+      export TMPDIR=$(getconf DARWIN_USER_TEMP_DIR)
+      export PATH="#{HOMEBREW_PREFIX}/bin:#{HOMEBREW_PREFIX}/sbin:/usr/local/bin:/usr/bin:/bin:$PATH"
       exec "#{Formula["oven-sh/bun/bun"].opt_bin}/bun" "#{libexec}/index.ts" "$@"
     SH
   end
