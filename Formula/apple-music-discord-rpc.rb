@@ -18,9 +18,10 @@ class AppleMusicDiscordRpc < Formula
   def install
     libexec.install Dir["*"]
 
-    system Formula["oven-sh/bun/bun"].opt_bin/"bun", "install",
-           "--production", "--frozen-lockfile",
-           chdir: libexec
+    cd libexec do
+      system Formula["oven-sh/bun/bun"].opt_bin/"bun", "install",
+             "--production", "--frozen-lockfile"
+    end
 
     (bin/"apple-music-discord-rpc").write <<~SH
       #!/bin/bash
